@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include "flash.h"
 
 #define CONSOLE_ONLY
 
@@ -6,8 +8,20 @@
 
 int main(int argc, char *argv[])
 {
-  for (int i = 0; i < argc; i++)
-    std::cout << argv[i] << std::endl;
+  std::cout << std::endl;
+
+  if (argc <= 1)
+    throw std::runtime_error("No file path given as argument");
+
+  const char *filename = argv[1];
+  printf("Opening file : %s\n", filename);
+
+  std::ifstream file(filename);
+  if (!file.is_open())
+    throw std::runtime_error("File not able to be read");
+  file.seekg(0, std::ios::beg);
+  Flash::SWFFile swffile(&file);
+
   return 0;
 }
 
