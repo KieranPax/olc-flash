@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "atomic": "cpp",
+    "charconv": "cpp",
+    "chrono": "cpp",
+    "format": "cpp"
+  }
+}

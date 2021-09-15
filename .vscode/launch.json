@@ -6,7 +6,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}\\dist\\main.exe",
-      "args": [],
+      "args": ["examples\\IDontEvenKnow.swf"],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}\\dist",
       "environment": [],

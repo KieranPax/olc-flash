@@ -7,9 +7,18 @@
 			"command": "C:\\msys64\\mingw64\\bin\\g++.exe",
 			"args": [
 				"-g",
+				"-std=c++17",
 				"${workspaceFolder}\\main.cpp",
 				"-o",
-				"${workspaceFolder}\\dist\\main.exe"
+				"${workspaceFolder}\\dist\\main.exe",
+				"-lpthread",				
+				"-luser32",
+				"-lgdi32",
+				"-lgdiplus",
+				"-lopengl32",
+				"-lShlwapi",
+				"-ldwmapi",
+				"-lstdc++fs"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
