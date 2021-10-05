@@ -12,6 +12,7 @@
     "istream": "cpp",
     "ranges": "cpp",
     "tuple": "cpp",
-    "utility": "cpp"
+    "utility": "cpp",
+    "stdexcept": "cpp"
   }
 }
