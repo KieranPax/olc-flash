@@ -3,6 +3,15 @@
     "atomic": "cpp",
     "charconv": "cpp",
     "chrono": "cpp",
-    "format": "cpp"
+    "format": "cpp",
+    "string": "cpp",
+    "functional": "cpp",
+    "array": "cpp",
+    "*.tcc": "cpp",
+    "memory": "cpp",
+    "istream": "cpp",
+    "ranges": "cpp",
+    "tuple": "cpp",
+    "utility": "cpp"
   }
 }

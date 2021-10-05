@@ -14,13 +14,16 @@ int main(int argc, char *argv[])
     throw std::runtime_error("No file path given as argument");
 
   const char *filename = argv[1];
-  printf("Opening file : %s\n", filename);
+  printf("Opening file      : %s\n", filename);
 
   std::ifstream file(filename);
   if (!file.is_open())
     throw std::runtime_error("File not able to be read");
   file.seekg(0, std::ios::beg);
   Flash::SWFFile swffile(&file);
+
+  int tagCount = 0;
+  while (swffile.nextTag().tagType != 0 && ++tagCount < 6){}
 
   return 0;
 }
