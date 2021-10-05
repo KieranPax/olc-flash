@@ -60,20 +60,16 @@ namespace Flash
       printf("\nFrame Rate          : %.2f\n", context->FrameRate);
       context->FrameCount = fs->ReadU16();
       printf("Frame Count         : %d\n", context->FrameCount);
-
-      printf("SFGIHFGSDHFGHISDFGHIGS %d\n",*(uint32_t *)(fs->_buffer + 15));
     }
 
     Tags::SWFTagHeader nextTag()
     {
       uint32_t tagCode = fs->ReadU16();
-      printf("TAG CODE : %d\n", tagCode);
       Tags::SWFTagHeader header{fs->now(), tagCode >> 6, tagCode & 0x3f};
       if (header.tagLength == 0x3f)
       {
         header.tagLength = fs->ReadU32();
       }
-      printf("TAG OFFSET : %d\n          ", fs->offset+8);
 
       Tags::SWFTagType tagTypeData = Tags::getTagType(header.tagType);
       tagTypeData.loadFunction(fs, context, &header);
@@ -83,8 +79,10 @@ namespace Flash
   private:
     char *data_buffer;
     FileReader *fs;
-    SWFRuntime *context;
+
+  public:
     uint8_t version;
     uint32_t uncompressed_size;
+    SWFRuntime *context;
   };
 }

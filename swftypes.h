@@ -26,4 +26,35 @@ namespace Flash
       printf("Rect{%i %i %i %i}", xmin, xmax, ymin, ymax);
     }
   };
+
+  struct Character
+  {
+    int id;
+    int type;
+    char *data;
+    Character *next;
+
+    Character(int _id, int _type, char *_data)
+    {
+      id = _id;
+      type = _type;
+      data = _data;
+      next = nullptr;
+    }
+
+    void push(Character* node){
+      if(next == nullptr) next =node;
+      else next->push(node);
+    }
+  };
+
+  enum ActionScriptMode{
+    Disabled,
+    ASclassic,
+    AS3
+  };
+
+  struct Settings{
+    ActionScriptMode ASMode;
+  };
 }

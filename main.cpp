@@ -23,7 +23,12 @@ int main(int argc, char *argv[])
   Flash::SWFFile swffile(&file);
 
   int tagCount = 0;
-  while (swffile.nextTag().tagType != 0 && ++tagCount < 6){}
+  while (++tagCount < 5000)
+  {
+    if (swffile.nextTag().tagType == 0)
+      break;
+  }
+  printf("Playback ended (Total SWF tags : %d)\n", tagCount);
 
   return 0;
 }

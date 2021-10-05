@@ -6,102 +6,8 @@
 
 namespace Flash::Tags
 {
-  // char *tagTypeRef[] = {
-  //     "End",
-  //     "ShowFrame",
-  //     "DefineShape",
-  //     "",
-  //     "PlaceObject",
-  //     "RemoveObject",
-  //     "DefineBits",
-  //     "DefineButton",
-  //     "JPEGTables",
-  //     "SetBackgroundColor",
-  //     "DefineFont",
-  //     "DefineText",
-  //     "DoAction",
-  //     "DefineFontInfo",
-  //     "DefineSound",
-  //     "StartSound",
-  //     "",
-  //     "DefineButtonSound",
-  //     "SoundStreamHead",
-  //     "SoundStreamBlock",
-  //     "DefineBitsLossless",
-  //     "DefineBitsJPEG2",
-  //     "DefineShape2",
-  //     "DefineButtonCxform",
-  //     "Protect",
-  //     "",
-  //     "PlaceObject2",
-  //     "",
-  //     "RemoveObject2",
-  //     "",
-  //     "",
-  //     "",
-  //     "DefineShape3",
-  //     "DefineText2",
-  //     "DefineButton2",
-  //     "DefineBitsJPEG3",
-  //     "DefineBitsLossless2",
-  //     "DefineEditText",
-  //     "",
-  //     "DefineSprite",
-  //     "",
-  //     "",
-  //     "",
-  //     "FrameLabel",
-  //     "",
-  //     "SoundStreamHead2",
-  //     "DefineMorphShape",
-  //     "",
-  //     "DefineFont2",
-  //     "",
-  //     "",
-  //     "",
-  //     "",
-  //     "",
-  //     "",
-  //     "",
-  //     "ExportAssets",
-  //     "ImportAssets",
-  //     "EnableDebugger",
-  //     "DoInitAction",
-  //     "DefineVideoStream",
-  //     "VideoFrame",
-  //     "DefineFontInfo2",
-  //     "",
-  //     "EnableDebugger2",
-  //     "ScriptLimits",
-  //     "SetTabIndex",
-  //     "",
-  //     "",
-  //     "FileAttributes",
-  //     "PlaceObject3",
-  //     "ImportAssets2",
-  //     "",
-  //     "DefineFontAlignZones",
-  //     "CSMTextSettings",
-  //     "DefineFont3",
-  //     "SymbolClass",
-  //     "Metadata",
-  //     "DefineScalingGrid",
-  //     "",
-  //     "",
-  //     "",
-  //     "DoABC",
-  //     "DefineShape4",
-  //     "DefineMorphShape2",
-  //     "",
-  //     "DefineSceneAndFrameLabelData",
-  //     "DefineBinaryData",
-  //     "DefineFontName",
-  //     "StartSound2",
-  //     "DefineBitsJPEG4",
-  //     "DefineFont4",
-  //     "",
-  //     "EnableTelemetry" // 93
-  // };
+  char *tagTypeRef = "End\0ShowFrame\0DefineShape\0\0PlaceObject\0RemoveObject\0DefineBits\0DefineButton\0JPEGTables\0SetBackgroundColor\0DefineFont\0DefineText\0DoAction\0DefineFontInfo\0DefineSound\0StartSound\0\0DefineButtonSound\0SoundStreamHead\0SoundStreamBlock\0DefineBitsLossless\0DefineBitsJPEG2\0DefineShape2\0DefineButtonCxform\0Protect\0\0PlaceObject2\0\0RemoveObject2\0\0\0\0DefineShape3\0DefineText2\0DefineButton2\0DefineBitsJPEG3\0DefineBitsLossless2\0DefineEditText\0\0DefineSprite\0\0\0\0FrameLabel\0\0SoundStreamHead2\0DefineMorphShape\0\0DefineFont2\0\0\0\0\0\0\0\0ExportAssets\0ImportAssets\0EnableDebugger\0DoInitAction\0DefineVideoStream\0VideoFrame\0DefineFontInfo2\0\0EnableDebugger2\0ScriptLimits\0SetTabIndex\0\0\0FileAttributes\0PlaceObject3\0ImportAssets2\0\0DefineFontAlignZones\0CSMTextSettings\0DefineFont3\0SymbolClass\0Metadata\0DefineScalingGrid\0\0\0\0DoABC\0DefineShape4\0DefineMorphShape2\0\0DefineSceneAndFrameLabelData\0DefineBinaryData\0DefineFontName\0StartSound2\0DefineBitsJPEG4\0DefineFont4\0\0EnableTelemetry";
+  short tagTypeRefIndices[] = {0, 4, 14, 26, 27, 39, 52, 63, 76, 87, 106, 117, 128, 137, 152, 164, 175, 176, 194, 210, 227, 246, 262, 275, 294, 302, 303, 316, 317, 331, 332, 333, 334, 347, 359, 373, 389, 409, 424, 425, 438, 439, 440, 441, 452, 453, 470, 487, 488, 500, 501, 502, 503, 504, 505, 506, 507, 520, 533, 548, 561, 579, 590, 606, 607, 623, 636, 648, 649, 650, 665, 678, 692, 693, 714, 730, 742, 754, 763, 781, 782, 783, 784, 790, 803, 821, 822, 851, 868, 883, 895, 911, 923, 924};
 
   struct SWFTagHeader
   {
@@ -116,35 +22,45 @@ namespace Flash::Tags
   struct SWFTagType
   {
     int tagType;
-    int (*loadFunction)(FileReader *, SWFRuntime *, SWFTagHeader *);
+    void (*loadFunction)(FileReader *, SWFRuntime *, SWFTagHeader *);
   };
 
-  // int loadTagEnd(FileReader *fs, SWFRuntime *context, SWFTagHeader tag)
-  // {
-  //   printf("End{ }\n");
-  //   return -1;
-  // }
-
-  // int loadTagNull(FileReader *fs, SWFRuntime *context, SWFTagHeader tag)
-  // {
-  //   printf("Null{ }\n");
-  //   fs->offset += tag.tagLength;
-  //   return -1;
-  // }
-
-  int loadTagUnknown(FileReader *fs, SWFRuntime *context, SWFTagHeader *tag)
+  void loadTagEnd(FileReader *fs, SWFRuntime *context, SWFTagHeader *tag)
   {
-    // if (tag->tagType <= 93)
-    //   printf("Unknown{ %d %d %s }\n", tag->tagType, tag->tagLength, tagTypeRef[tag->tagType]);
-    // else
-      printf("YaGoose{ %d %d }\n", tag->tagType, tag->tagLength);
+    printf("End{ }\n");
+    context->stop();
+  }
+
+  void loadTagShowFrame(FileReader *fs, SWFRuntime *context, SWFTagHeader *tag)
+  {
+    printf("ShowFrame{ }\n");
+    context->frame();
+  }
+
+  void loadTagDefine(FileReader *fs, SWFRuntime *context, SWFTagHeader *tag)
+  {
+    Character *v = new Character(fs->ReadU16(), tag->tagType, tag->tagStart + 2);
+    printf("%s{ %d }\n",tagTypeRef + tagTypeRefIndices[tag->tagType], v->id);
+    context->addCharacter(v);
+    fs->offset += tag->tagLength - 2;
+  }
+
+  void loadTagUnknown(FileReader *fs, SWFRuntime *context, SWFTagHeader *tag)
+  {
+    if(tag->tagType <= 93)
+      printf("Unknown{ %d %d %s }\n", tag->tagType, tag->tagLength, tagTypeRef + tagTypeRefIndices[tag->tagType]);
     fs->offset += tag->tagLength;
-    return -1;
   }
 
   SWFTagType TagTypes[] = {
-      // {0, loadTagEnd},
-      // {255, loadTagNull},
+      {0, loadTagEnd},
+      {1, loadTagShowFrame},
+      {2, loadTagDefine},
+      {84, loadTagDefine},
+      {83, loadTagDefine},
+      {39, loadTagDefine},
+      {6, loadTagDefine},
+      {22, loadTagDefine},
       {-1, loadTagUnknown},
   };
 
